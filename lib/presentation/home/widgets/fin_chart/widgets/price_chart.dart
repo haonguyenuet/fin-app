@@ -1,7 +1,7 @@
 import 'package:fin_app/data/models/candle.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/dash_line.dart';
-import 'package:fin_app/presentation/home/utils/helpers.dart';
+import 'package:fin_app/shared/utils/format_util.dart';
 import 'package:flutter/material.dart';
 
 class PriceChart extends StatelessWidget {

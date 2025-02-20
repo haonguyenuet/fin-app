@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/presentation/home/extensions/double_ext.dart';
-import 'package:fin_app/presentation/home/utils/helpers.dart';
+import 'package:fin_app/shared/extensions/double_ext.dart';
+import 'package:fin_app/shared/utils/format_util.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/dash_line.dart';
 

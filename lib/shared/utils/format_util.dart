@@ -1,4 +1,4 @@
-import 'package:fin_app/presentation/home/extensions/double_ext.dart';
+import 'package:fin_app/shared/extensions/double_ext.dart';
 
 String formatPrice(double price) {
   int decimalPlaces;
