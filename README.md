@@ -1,33 +1,46 @@
 # FinApp
 
-A **self-built** candlestick chart in Flutter, crafted from scratch without using third-party charting packages. Inspired by **Binance App**, this project focuses on building an elegant yet minimal UI while handling **real-time price updates** using Binance API. Every pixel, every interaction had to be **manually calculated and optimized**.
+A **self-built** financial app in Flutter, crafted from scratch without using third-party charting packages. Inspired by **Binance App**, this project focuses on building an elegant yet minimal UI while handling **real-time price updates** using Binance API. Every pixel, every interaction had to be **manually calculated and optimized**.
 
-## Features
+## 1. Key Features
 
-- ✅ **Custom-built candlestick rendering** – No dependencies, full control over rendering.  
-- ✅ **Real-time data streaming** – Fetches and updates the chart dynamically via WebSockets.  
-- ✅ **Interactive chart interactions** – Crosshairs, zooming, and smooth animations.  
-- ✅ **Large dataset** – Good performance on heavy data.  
-- ⏳ **Advanced technical indicators** – Planned enhancements for moving averages and trend lines.  
-- ⏳ **Support multiple chart types** (line chart, OHLC, etc.).
+- ✅ **Self-built candlestick chart** – No dependencies, fully control rendering with drag, zoom and crosshairs
+- ✅ **Large dataset** - Ensures good performance on heavy data
+- ✅ **Live Chart Updates** – Real-time candlestick data with smooth animations
+- ⏳ **Live Symbol List** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
+- ⏳ **Technical indicators** – Planned enhancements for moving averages and trend lines
 
-## The Challenge
+## 2. The Challenge
 
-Building a financial chart from scratch is **incredibly complex**. Unlike regular UI elements, a candlestick chart demands:
+### 2.1 Candlestick Chart
 
-- 📈 **Precise coordinate mapping** for price movements.
-- ⏰ **Handling variable time intervals** dynamically.
-- 🔥 **Efficient rendering of large datasets** without performance loss
-- ⚡ **Real-time updates & state management** while ensuring smooth UX.
-- 🎯 **Interactivity with touch gestures**, zoom, and crosshair indicators.
+Building a candlestick chart from scratch is far from simple. Unlike static UI components, a candlestick chart requires:  
 
-## Tech Stack
+- **Optimized Rendering** – To optimize performance, the chart must avoid drawing off-screen elements. Every candle, grid line, and label should be conditionally drawn based on the viewport.
+- **Precise coordinate mapping** – Each price movement must be accurately translated into screen coordinates.
+- **Efficient data handling** – Keeping performance smooth even with thousands of candles.
+- **Real-time updates** – Ensuring smooth animations and preventing UI lag.  
+- **Touch gestures** – Pinch-to-zoom, crosshairs, and dynamic scaling.
+
+This required deep optimization techniques, manual calculations, and careful use of **Flutter's CustomPainter** to keep performance smooth without relying on external libraries.  
+
+### 2.2 Symbol List
+
+Displaying a **real-time symbol list** with prices introduces another layer of complexity:  
+
+- **Selective Updates** – Avoid re-rendering the entire list when only a few symbols update.
+- **Dynamic WebSocket Management** – Subscribe to visible symbols and unsubscribe from off-screen ones to optimize performance and reduce network load.
+- **Scalability** – Binance supports thousands of trading pairs, meaning updates come in fast and frequently. A naive approach could overwhelm the app with unnecessary UI rebuilds.  
+
+This part of the project demands a smart **state management strategy**, along with techniques like **lazy loading, viewport tracking, and granular updates** to ensure smooth performance.
+
+## 3. Tech Stack
 
 - **Flutter** (Stack and CustomPainter for chart drawing)
 - **WebSocket & REST API** (for real-time Binance data)
 - **State Management** (Riverpod and MVVM architecture)
 
-## Screenshots
+## 4. Screenshots
 
 | Crosshair Indicators | ZoomOut |
 |---|---|
