@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fin_app/presentation/home/home_viewmodel.dart';
-import 'package:fin_app/presentation/home/widgets/bottom_sheet_handle.dart';
+import 'package:fin_app/shared/widgets/bottom_sheet_handle.dart';
 
 class SymbolPicker extends ConsumerWidget {
   const SymbolPicker({super.key});
