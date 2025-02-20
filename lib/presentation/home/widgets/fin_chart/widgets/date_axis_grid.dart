@@ -1,6 +1,6 @@
-import 'package:fin_chart/data/models/candle.dart';
-import 'package:fin_chart/presentation/home/widgets/fin_chart/fin_chart_const.dart';
-import 'package:fin_chart/presentation/home/utils/helpers.dart';
+import 'package:fin_app/data/models/candle.dart';
+import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/presentation/home/utils/helpers.dart';
 import 'package:flutter/material.dart';
 
 class DateAxisGrid extends StatefulWidget {

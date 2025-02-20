@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fin_chart/data/models/time_interval.dart';
+import 'package:fin_app/data/models/time_interval.dart';
 
 class CandlestickStreamRequest {
   final int id;

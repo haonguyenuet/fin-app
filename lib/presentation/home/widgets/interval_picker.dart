@@ -1,6 +1,6 @@
-import 'package:fin_chart/data/models/time_interval.dart';
-import 'package:fin_chart/presentation/home/home_viewmodel.dart';
-import 'package:fin_chart/presentation/home/widgets/bottom_sheet_handle.dart';
+import 'package:fin_app/data/models/time_interval.dart';
+import 'package:fin_app/presentation/home/home_viewmodel.dart';
+import 'package:fin_app/presentation/home/widgets/bottom_sheet_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

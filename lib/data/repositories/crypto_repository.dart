@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:fin_chart/data/models/candle.dart';
-import 'package:fin_chart/data/models/candlestick_event.dart';
-import 'package:fin_chart/data/models/symbol.dart';
-import 'package:fin_chart/data/models/time_interval.dart';
-import 'package:fin_chart/data/requests/candlestick_stream_request.dart';
-import 'package:fin_chart/data/requests/fetch_candles_request.dart';
+import 'package:fin_app/data/models/candle.dart';
+import 'package:fin_app/data/models/candlestick_event.dart';
+import 'package:fin_app/data/models/symbol.dart';
+import 'package:fin_app/data/models/time_interval.dart';
+import 'package:fin_app/data/requests/candlestick_stream_request.dart';
+import 'package:fin_app/data/requests/fetch_candles_request.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod/riverpod.dart';

@@ -1,4 +1,4 @@
-package com.example.fin_chart
+package com.example.f
 
 import io.flutter.embedding.android.FlutterActivity
 

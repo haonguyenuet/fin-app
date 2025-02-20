@@ -1,4 +1,4 @@
-import 'package:fin_chart/data/models/candle.dart';
+import 'package:fin_app/data/models/candle.dart';
 
 class CandlestickEvent {
   final String eventType;

@@ -1,4 +1,4 @@
-name: fin_chart
+name: fin_app
 description: "A self-built candlestick chart in Flutter"
 publish_to: "none"
 

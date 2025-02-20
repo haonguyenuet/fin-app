@@ -1,4 +1,4 @@
-import 'package:fin_chart/presentation/home/home_screen.dart';
+import 'package:fin_app/presentation/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
