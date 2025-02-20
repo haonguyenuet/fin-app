@@ -1,4 +1,4 @@
-# 📊 FinChart
+# FinApp
 
 A **self-built** candlestick chart in Flutter, crafted from scratch without using third-party charting packages. Inspired by **Binance App**, this project focuses on building an elegant yet minimal UI while handling **real-time price updates** using Binance API. Every pixel, every interaction had to be **manually calculated and optimized**.
 
