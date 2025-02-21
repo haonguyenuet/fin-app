@@ -1,4 +1,4 @@
-import 'package:fin_app/presentation/home/home_screen.dart';
+import 'package:fin_app/presentation/symbol_detail/symbol_detail_screen.dart';
 import 'package:fin_app/shared/consts/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +11,7 @@ class Application extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
-      home: HomeScreen(),
+      home: SymbolDetailScreen(),
     );
   }
 

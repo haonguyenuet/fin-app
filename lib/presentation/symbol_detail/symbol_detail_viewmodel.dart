@@ -1,21 +1,26 @@
 import 'dart:async';
 
+import 'package:fin_app/data/data_providers.dart';
 import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/data/models/candlestick_event.dart';
+import 'package:fin_app/data/events/candlestick_event.dart';
 import 'package:fin_app/data/models/symbol.dart';
 import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/data/repositories/crypto_repository.dart';
+import 'package:fin_app/data/repositories/candlestick_repository.dart';
+import 'package:fin_app/data/repositories/market_repository.dart';
 import 'package:riverpod/riverpod.dart';
 
-final homeViewmodelProvider = StateNotifierProvider.autoDispose<HomeViewmodel, HomeState>((ref) {
-  final cryptoRepository = ref.watch(cryptoRepositoryProvider);
-  return HomeViewmodel(cryptoRepository);
+final symbolDetailVMProvider = StateNotifierProvider.autoDispose<SymbolDetailViewModel, SymbolDetailState>((ref) {
+  return SymbolDetailViewModel(
+    ref.read(marketRepository),
+    ref.read(candlestickRepository),
+  );
 });
 
-class HomeViewmodel extends StateNotifier<HomeState> {
-  HomeViewmodel(this._cryptoRepository) : super(HomeState());
+class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
+  SymbolDetailViewModel(this._marketRepository, this._candlestickRepository) : super(SymbolDetailState());
 
-  final CryptoRepository _cryptoRepository;
+  final MarketRepository _marketRepository;
+  final CandlestickRepository _candlestickRepository;
 
   void init() async {
     await _fetchSymbols();
@@ -23,36 +28,35 @@ class HomeViewmodel extends StateNotifier<HomeState> {
     _fetchNewCandles();
 
     /// Websocket streams handling
-    _cryptoRepository.connectWebsocket();
-    _cryptoRepository.candlestickStream.listen(_onCandlestickEvent);
+    _candlestickRepository.candlestickStream.listen(_onCandlestickEvent);
   }
 
   Future<void> _fetchSymbols() async {
-    final symbols = await _cryptoRepository.fetchSymbols();
+    final symbols = await _marketRepository.fetchSymbols();
     state = state.copyWith(
       symbols: symbols,
-      selectedSymbol: symbols.first,
+      currentSymbol: symbols.first,
     );
   }
 
   Future<void> _fetchIntervals() async {
-    final intervals = await _cryptoRepository.fetchIntervals();
+    final intervals = await _candlestickRepository.fetchIntervals();
     state = state.copyWith(
       intervals: intervals,
-      selectedInterval: intervals.where((interval) => interval.isPinned).first,
+      currentInterval: intervals.where((interval) => interval.isPinned).first,
     );
   }
 
   Future<void> _fetchNewCandles() async {
-    final symbol = state.selectedSymbol;
-    final interval = state.selectedInterval;
+    final symbol = state.currentSymbol;
+    final interval = state.currentInterval;
     if (symbol == null || interval == null) return;
 
-    _cryptoRepository.unsubscribeCandlestickStream(symbol: symbol.value, interval: interval);
-    final candles = await _cryptoRepository.fetchCandles(symbol: symbol.value, interval: interval);
+    _candlestickRepository.unsubscribeCandlestickStream(symbol: symbol.value, interval: interval);
+    final candles = await _candlestickRepository.fetchCandles(symbol: symbol.value, interval: interval);
     if (candles.isNotEmpty) {
       state = state.copyWith(candles: candles);
-      _cryptoRepository.subscribeCandlestickStream(symbol: symbol.value, interval: interval);
+      _candlestickRepository.subscribeCandlestickStream(symbol: symbol.value, interval: interval);
     }
   }
 
@@ -75,23 +79,23 @@ class HomeViewmodel extends StateNotifier<HomeState> {
     }
   }
 
-  void onSymbolSelected(CryptoSymbol symbol) {
-    state = state.copyWith(selectedSymbol: symbol);
+  void onSymbolChanged(MarketSymbol symbol) {
+    state = state.copyWith(currentSymbol: symbol);
     _fetchNewCandles();
   }
 
-  void onIntervalSelected(TimeInterval interval) {
-    state = state.copyWith(selectedInterval: interval);
+  void onIntervalChanged(TimeInterval interval) {
+    state = state.copyWith(currentInterval: interval);
     _fetchNewCandles();
   }
 
   Future<void> fetchMoreCandles() async {
     final candles = state.candles;
-    final symbol = state.selectedSymbol;
-    final interval = state.selectedInterval;
+    final symbol = state.currentSymbol;
+    final interval = state.currentInterval;
     if (candles == null || candles.isEmpty || symbol == null || interval == null) return;
 
-    final newCandles = await _cryptoRepository.fetchCandles(
+    final newCandles = await _candlestickRepository.fetchCandles(
       symbol: symbol.value,
       interval: interval,
       endTime: candles.last.date.millisecondsSinceEpoch + 1,
@@ -101,42 +105,36 @@ class HomeViewmodel extends StateNotifier<HomeState> {
       state = state.copyWith(candles: [...candles, ...newCandles]);
     }
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _cryptoRepository.dispose();
-  }
 }
 
-class HomeState {
-  HomeState({
+class SymbolDetailState {
+  SymbolDetailState({
     this.symbols,
     this.intervals,
     this.candles,
-    this.selectedInterval,
-    this.selectedSymbol,
+    this.currentInterval,
+    this.currentSymbol,
   });
 
-  final List<CryptoSymbol>? symbols;
+  final List<MarketSymbol>? symbols;
   final List<TimeInterval>? intervals;
   final List<Candle>? candles;
-  final TimeInterval? selectedInterval;
-  final CryptoSymbol? selectedSymbol;
+  final TimeInterval? currentInterval;
+  final MarketSymbol? currentSymbol;
 
-  HomeState copyWith({
-    List<CryptoSymbol>? symbols,
+  SymbolDetailState copyWith({
+    List<MarketSymbol>? symbols,
     List<TimeInterval>? intervals,
     List<Candle>? candles,
-    TimeInterval? selectedInterval,
-    CryptoSymbol? selectedSymbol,
+    TimeInterval? currentInterval,
+    MarketSymbol? currentSymbol,
   }) {
-    return HomeState(
+    return SymbolDetailState(
       symbols: symbols ?? this.symbols,
       intervals: intervals ?? this.intervals,
       candles: candles ?? this.candles,
-      selectedInterval: selectedInterval ?? this.selectedInterval,
-      selectedSymbol: selectedSymbol ?? this.selectedSymbol,
+      currentInterval: currentInterval ?? this.currentInterval,
+      currentSymbol: currentSymbol ?? this.currentSymbol,
     );
   }
 }

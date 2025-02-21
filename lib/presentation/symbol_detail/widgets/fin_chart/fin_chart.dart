@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/crosshair_indicators.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/date_axis_grid.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/price_chart.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/volume_chart.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/widgets/crosshair_indicators.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/widgets/date_axis_grid.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/widgets/price_chart.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/widgets/volume_chart.dart';
 import 'package:fin_app/shared/consts/app_animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

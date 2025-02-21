@@ -1,13 +1,9 @@
-import 'dart:convert';
-
-List<CryptoSymbol> parseCryptoSymbols(String body) {
-  final map = jsonDecode(body) as Map<String, dynamic>;
-  final symbols = map['symbols'] as List<dynamic>;
-  return symbols.map((e) => CryptoSymbol.fromMap(e)).where((e) => e.quoteAsset.toUpperCase() == 'USDT').toList();
+List<MarketSymbol> parseMarketSymbols(List<dynamic> symbols) {
+  return symbols.map((e) => MarketSymbol.fromMap(e)).where((e) => e.quoteAsset.toUpperCase() == 'USDT').toList();
 }
 
-class CryptoSymbol {
-  CryptoSymbol({
+class MarketSymbol {
+  MarketSymbol({
     required this.value,
     required this.baseAsset,
     required this.quoteAsset,
@@ -19,8 +15,8 @@ class CryptoSymbol {
 
   String get name => '$baseAsset/$quoteAsset';
 
-  factory CryptoSymbol.fromMap(Map<String, dynamic> map) {
-    return CryptoSymbol(
+  factory MarketSymbol.fromMap(Map<String, dynamic> map) {
+    return MarketSymbol(
       value: map['symbol'],
       baseAsset: map['baseAsset'],
       quoteAsset: map['quoteAsset'],

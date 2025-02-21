@@ -1,5 +1,5 @@
 import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/fin_chart_const.dart';
 import 'package:fin_app/shared/consts/app_animation.dart';
 import 'package:fin_app/shared/consts/app_color.dart';
 import 'package:fin_app/shared/consts/app_typo.dart';

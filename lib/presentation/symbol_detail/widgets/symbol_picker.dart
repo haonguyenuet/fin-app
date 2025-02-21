@@ -4,7 +4,7 @@ import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:fin_app/presentation/home/home_viewmodel.dart';
+import 'package:fin_app/presentation/symbol_detail/symbol_detail_viewmodel.dart';
 import 'package:fin_app/shared/widgets/bottom_sheet_handle.dart';
 
 class SymbolPicker extends ConsumerWidget {
@@ -12,8 +12,8 @@ class SymbolPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedSymbol = ref.watch(homeViewmodelProvider.select((value) => value.selectedSymbol));
-    if (selectedSymbol == null) {
+    final currentSymbol = ref.watch(symbolDetailVMProvider.select((value) => value.currentSymbol));
+    if (currentSymbol == null) {
       return const SizedBox();
     }
 
@@ -28,7 +28,7 @@ class SymbolPicker extends ConsumerWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(selectedSymbol.name, style: AppTypography.headlineMedium),
+            Text(currentSymbol.name, style: AppTypography.headlineMedium),
             const SizedBox(width: 2),
             const Icon(Icons.arrow_drop_down, size: 28),
           ],
@@ -46,13 +46,13 @@ class _SymbolSearchSheet extends ConsumerStatefulWidget {
 }
 
 class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
-  List<CryptoSymbol> filteredSymbols = [];
-  List<CryptoSymbol> allSymbols = [];
+  List<MarketSymbol> filteredSymbols = [];
+  List<MarketSymbol> allSymbols = [];
 
   @override
   void initState() {
     super.initState();
-    allSymbols = ref.read(homeViewmodelProvider).symbols ?? [];
+    allSymbols = ref.read(symbolDetailVMProvider).symbols ?? [];
     filteredSymbols = List.of(allSymbols);
   }
 
@@ -64,7 +64,7 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedSymbol = ref.watch(homeViewmodelProvider.select((value) => value.selectedSymbol));
+    final currentSymbol = ref.watch(symbolDetailVMProvider.select((value) => value.currentSymbol));
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Column(
@@ -83,7 +83,7 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
                 final symbol = filteredSymbols[index];
                 return _buildSymbolOption(
                   symbol: symbol,
-                  isSelected: symbol == selectedSymbol,
+                  isSelected: symbol == currentSymbol,
                 );
               },
             ),
@@ -115,10 +115,10 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
     );
   }
 
-  Widget _buildSymbolOption({required CryptoSymbol symbol, required bool isSelected}) {
+  Widget _buildSymbolOption({required MarketSymbol symbol, required bool isSelected}) {
     return ListTile(
       onTap: () {
-        ref.read(homeViewmodelProvider.notifier).onSymbolSelected(symbol);
+        ref.read(symbolDetailVMProvider.notifier).onSymbolChanged(symbol);
         Navigator.of(context).pop();
       },
       contentPadding: const EdgeInsets.symmetric(

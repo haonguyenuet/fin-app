@@ -1,5 +1,5 @@
 import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/presentation/home/home_viewmodel.dart';
+import 'package:fin_app/presentation/symbol_detail/symbol_detail_viewmodel.dart';
 import 'package:fin_app/shared/consts/app_color.dart';
 import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:fin_app/shared/widgets/bottom_sheet_handle.dart';
@@ -11,8 +11,8 @@ class IntervalPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedInterval = ref.watch(homeViewmodelProvider.select((value) => value.selectedInterval));
-    final allIntervals = ref.watch(homeViewmodelProvider.select((value) => value.intervals)) ?? [];
+    final currentInterval = ref.watch(symbolDetailVMProvider.select((value) => value.currentInterval));
+    final allIntervals = ref.watch(symbolDetailVMProvider.select((value) => value.intervals)) ?? [];
     final pinnedIntervals = allIntervals.where((interval) => interval.isPinned).toList();
 
     return SingleChildScrollView(
@@ -24,12 +24,12 @@ class IntervalPicker extends ConsumerWidget {
           ...pinnedIntervals.map(
             (interval) => IntervalButton(
               interval: interval,
-              isSelected: interval == selectedInterval,
-              onPressed: () => ref.read(homeViewmodelProvider.notifier).onIntervalSelected(interval),
+              isSelected: interval == currentInterval,
+              onPressed: () => ref.read(symbolDetailVMProvider.notifier).onIntervalChanged(interval),
             ),
           ),
           MoreIntervalButton(
-            selectedInterval: selectedInterval,
+            currentInterval: currentInterval,
             onPressed: () => showModalBottomSheet(
               context: context,
               builder: (context) => const SelectIntervalSheet(),
@@ -89,36 +89,36 @@ class IntervalButton extends StatelessWidget {
 class MoreIntervalButton extends StatelessWidget {
   const MoreIntervalButton({
     super.key,
-    required this.selectedInterval,
+    required this.currentInterval,
     required this.onPressed,
   });
 
-  final TimeInterval? selectedInterval;
+  final TimeInterval? currentInterval;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final hasSelectedInterval = selectedInterval != null && !selectedInterval!.isPinned;
+    final hasCurrentInterval = currentInterval?.isPinned == false;
     return SizedBox(
       height: 30,
       child: TextButton(
         onPressed: onPressed,
         style: IntervalButton.getStyle(
-          isSelected: hasSelectedInterval,
+          isSelected: hasCurrentInterval,
           padding: const EdgeInsets.symmetric(horizontal: 12),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              hasSelectedInterval ? selectedInterval!.value : 'More',
-              style: IntervalButton.getTextStyle(isSelected: hasSelectedInterval),
+              hasCurrentInterval ? currentInterval!.value : 'More',
+              style: IntervalButton.getTextStyle(isSelected: hasCurrentInterval),
             ),
             const SizedBox(width: 4),
             Icon(
               Icons.keyboard_arrow_down,
               size: 20,
-              color: hasSelectedInterval ? AppColors.onPrimary : AppColors.onSecondary,
+              color: hasCurrentInterval ? AppColors.onPrimary : AppColors.onSecondary,
             ),
           ],
         ),
@@ -132,8 +132,8 @@ class SelectIntervalSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedInterval = ref.watch(homeViewmodelProvider.select((value) => value.selectedInterval));
-    final intervals = ref.watch(homeViewmodelProvider.select((value) => value.intervals)) ?? [];
+    final currentInterval = ref.watch(symbolDetailVMProvider.select((value) => value.currentInterval));
+    final intervals = ref.watch(symbolDetailVMProvider.select((value) => value.intervals)) ?? [];
 
     return SafeArea(
       child: Column(
@@ -141,7 +141,7 @@ class SelectIntervalSheet extends ConsumerWidget {
         children: [
           const BottomSheetHandle(),
           const Text('Select Interval', style: AppTypography.title),
-          _buildIntervalGrid(context, ref, intervals, selectedInterval),
+          _buildIntervalGrid(context, ref, intervals, currentInterval),
         ],
       ),
     );
@@ -151,7 +151,7 @@ class SelectIntervalSheet extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     List<TimeInterval> intervals,
-    TimeInterval? selectedInterval,
+    TimeInterval? currentInterval,
   ) {
     final spacing = 8.0;
     final padding = 16.0;
@@ -166,9 +166,9 @@ class SelectIntervalSheet extends ConsumerWidget {
                   width: itemWidth,
                   height: 40,
                   interval: interval,
-                  isSelected: interval == selectedInterval,
+                  isSelected: interval == currentInterval,
                   onPressed: () {
-                    ref.read(homeViewmodelProvider.notifier).onIntervalSelected(interval);
+                    ref.read(symbolDetailVMProvider.notifier).onIntervalChanged(interval);
                     Navigator.pop(context);
                   },
                 ))
