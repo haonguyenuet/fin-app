@@ -2,19 +2,15 @@ import 'package:fin_app/data/events/candlestick_event.dart';
 import 'package:fin_app/data/models/candle.dart';
 import 'package:fin_app/data/models/time_interval.dart';
 import 'package:fin_app/data/repositories/base_repository.dart';
-import 'package:fin_app/data/sources/networking/http_service.dart';
-import 'package:fin_app/data/sources/networking/requests/fetch_candles_request.dart';
+import 'package:fin_app/data/sources/networking/services/candlestick_api_service.dart';
 import 'package:fin_app/data/sources/streaming/streaming_service.dart';
-import 'package:flutter/foundation.dart';
 
 class CandlestickRepository extends BaseRepository {
-  CandlestickRepository({
-    required HttpService httpService,
-    required StreamingService streamingService,
-  })  : _httpService = httpService,
+  CandlestickRepository(CandlestickApiService apiService, StreamingService streamingService)
+      : _apiService = apiService,
         _streamingService = streamingService;
 
-  final HttpService _httpService;
+  final CandlestickApiService _apiService;
   final StreamingService _streamingService;
 
   Future<List<TimeInterval>> fetchIntervals() async {
@@ -26,12 +22,12 @@ class CandlestickRepository extends BaseRepository {
     required TimeInterval interval,
     int? endTime,
   }) async {
-    final request = FetchCandlesRequest(symbol: symbol, interval: interval, endTime: endTime);
-    final response = await safeCallApi(
-      () => _httpService.get<List<dynamic>>("/klines?${request.toQueryString()}"),
+    final candles = await safeCallApi(
+      request: _apiService.fetchCandles(symbol: symbol, interval: interval, endTime: endTime),
     );
-    if (response != null) {
-      return await compute(parseCandles, response);
+    if (candles != null) {
+      /// Reverse the list to display the latest candlestick first
+      return candles.reversed.toList();
     }
     return [];
   }

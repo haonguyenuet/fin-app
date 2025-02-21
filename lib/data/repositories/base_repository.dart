@@ -1,7 +1,7 @@
 class BaseRepository {
-  Future<T?> safeCallApi<T>(Future<T> Function() apiCall) async {
+  Future<T?> safeCallApi<T>({required Future<T> request}) async {
     try {
-      return await apiCall();
+      return await request;
     } catch (error) {
       print("API error: $error");
       return null;

@@ -31,7 +31,6 @@ class WebsocketService implements StreamingService {
 
         final map = jsonDecode(event) as Map<String, dynamic>;
         if (map['e'] == "kline") {
-          print(event);
           _candlestickStreamCtlr.sink.add(CandlestickEvent.fromMap(map));
         }
       },

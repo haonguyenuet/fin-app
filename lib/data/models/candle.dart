@@ -1,9 +1,3 @@
-List<Candle> parseCandles(List<dynamic> data) {
-  final candles = data.map((e) => Candle.fromList(e)).toList();
-  // we want the latest candle to be the first element in the list, so we reverse the list.
-  return candles.reversed.toList();
-}
-
 class Candle {
   Candle({
     required this.date,
