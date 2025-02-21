@@ -1,5 +1,7 @@
 import 'package:fin_app/data/models/time_interval.dart';
 import 'package:fin_app/presentation/home/home_viewmodel.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:fin_app/shared/widgets/bottom_sheet_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,15 +60,14 @@ class IntervalButton extends StatelessWidget {
   static ButtonStyle getStyle({required bool isSelected, double borderRadius = 4, EdgeInsetsGeometry? padding}) {
     return TextButton.styleFrom(
       padding: padding ?? EdgeInsets.zero,
-      backgroundColor: isSelected ? Colors.black87 : Colors.grey.shade100,
+      backgroundColor: isSelected ? AppColors.primary : AppColors.secondary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
     );
   }
 
   static TextStyle getTextStyle({required bool isSelected}) {
-    return TextStyle(
-      fontSize: 14,
-      color: isSelected ? Colors.white : Colors.grey.shade600,
+    return AppTypography.button.copyWith(
+      color: isSelected ? AppColors.onPrimary : AppColors.onSecondary,
       fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
     );
   }
@@ -117,7 +118,7 @@ class MoreIntervalButton extends StatelessWidget {
             Icon(
               Icons.keyboard_arrow_down,
               size: 20,
-              color: hasSelectedInterval ? Colors.white : Colors.grey.shade600,
+              color: hasSelectedInterval ? AppColors.onPrimary : AppColors.onSecondary,
             ),
           ],
         ),
@@ -139,10 +140,7 @@ class SelectIntervalSheet extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const BottomSheetHandle(),
-          const Text(
-            'Select Interval',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
+          const Text('Select Interval', style: AppTypography.title),
           _buildIntervalGrid(context, ref, intervals, selectedInterval),
         ],
       ),

@@ -34,9 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         builder: (context) {
           if (candles == null) {
             return const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-              ),
+              child: CircularProgressIndicator(),
             );
           }
 

@@ -1,6 +1,8 @@
 import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/shared/extensions/double_ext.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
+import 'package:fin_app/shared/extensions/double_ext.dart';
 import 'package:flutter/material.dart';
 
 class VolumeChart extends StatelessWidget {
@@ -63,7 +65,7 @@ class _VolumeAxis extends StatelessWidget {
         children: [
           Text(
             viewportHighestVolume.abbreviate(),
-            style: FinChartTypo.axisLabel,
+            style: AppTypography.axisLabel,
           ),
           // Text(
           //   viewportLowestVolume.abbreviate(),
@@ -103,7 +105,7 @@ class _VolumeBarsPainter extends CustomPainter {
 
   void _drawVolBar(Canvas canvas, Size size, int index, Candle candle, double heightPerVolume) {
     final paint = Paint()
-      ..color = candle.isBull ? FinChartColors.bullColor : FinChartColors.bearColor
+      ..color = candle.isBull ? AppColors.bull : AppColors.bear
       ..strokeWidth = barWidth - 1;
 
     final x = size.width - (index + 0.5) * barWidth;

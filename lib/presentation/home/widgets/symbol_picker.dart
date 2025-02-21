@@ -1,4 +1,6 @@
 import 'package:fin_app/data/models/symbol.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,10 +28,7 @@ class SymbolPicker extends ConsumerWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              selectedSymbol.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            Text(selectedSymbol.name, style: AppTypography.headlineMedium),
             const SizedBox(width: 2),
             const Icon(Icons.arrow_drop_down, size: 28),
           ],
@@ -97,11 +96,13 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
   Widget _buildSearchField() {
     return TextField(
       onChanged: _onSearch,
+      style: AppTypography.bodyLarge,
       decoration: InputDecoration(
         hintText: 'Search',
-        prefixIcon: const Icon(Icons.search),
+        hintStyle: AppTypography.bodyLarge.copyWith(color: AppColors.secondaryText),
+        prefixIcon: const Icon(Icons.search, color: AppColors.secondaryText),
         filled: true,
-        fillColor: Colors.grey.shade100,
+        fillColor: AppColors.input,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -126,9 +127,8 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
       ),
       title: Text(
         symbol.name,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        style: AppTypography.subtitle.copyWith(
+          fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:fin_app/data/models/candle.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:fin_app/shared/utils/format_util.dart';
 import 'package:flutter/material.dart';
 
@@ -93,12 +95,12 @@ class _DateAxisGridState extends State<DateAxisGrid> {
         Expanded(
           child: Container(
             width: 1,
-            color: Theme.of(context).dividerTheme.color,
+            color: AppColors.divider,
           ),
         ),
         Text(
           formatTime(labelTime, showTimeOfDay: showTimeOfDay),
-          style: FinChartTypo.axisLabel,
+          style: AppTypography.axisLabel,
         ),
       ],
     );

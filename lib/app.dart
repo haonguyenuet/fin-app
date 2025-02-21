@@ -1,4 +1,5 @@
 import 'package:fin_app/presentation/home/home_screen.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,22 +16,28 @@ class Application extends StatelessWidget {
   }
 
   ThemeData _buildTheme() {
-    final themeData = ThemeData(
-      colorScheme: ColorScheme.light(),
+    return ThemeData(
+      colorScheme: ColorScheme.light(
+        surface: AppColors.background,
+        onSurface: AppColors.foreground,
+        primary: AppColors.primary,
+        onPrimary: AppColors.onPrimary,
+        secondary: AppColors.secondary,
+        onSecondary: AppColors.onSecondary,
+      ),
       dividerTheme: DividerThemeData(
         space: 0,
         thickness: 1,
-        color: Color(0xFFF2F2F2),
+        color: AppColors.divider,
       ),
       bottomSheetTheme: BottomSheetThemeData(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
       ),
-    );
-
-    return themeData.copyWith(
-      textTheme: GoogleFonts.poppinsTextTheme(themeData.textTheme),
+      textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: AppColors.primaryText,
+      ),
     );
   }
 }

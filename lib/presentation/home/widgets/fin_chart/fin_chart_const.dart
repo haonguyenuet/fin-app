@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 
 class FinChartDefaults {
   /// The amount of candles to shift right (negative value means shifting left)
@@ -23,34 +23,7 @@ class FinChartDimens {
 
   /// Spacing between the price chart and the volume chart
   static const double priceToVolumeSpacing = 40;
-}
 
-class FinChartColors {
-  /// Color used for bullish (upward) price movements
-  static const Color bullColor = Color(0xFF26A69A);
-
-  /// Color used for bearish (downward) price movements
-  static const Color bearColor = Color(0xFFEF5350);
-
-  /// Color used for axis labels text
-  static const Color axisLabelColor = Color(0XFF8F8F8F);
-
-}
-
-class FinChartTypo {
-  static const TextStyle axisLabel = TextStyle(
-    fontSize: 12,
-    height: 1,
-    color: FinChartColors.axisLabelColor,
-  );
-
-   static const TextStyle tooltip = TextStyle(
-    fontSize: 12,
-    height: 1,
-    color: Color(0xFFFFFFFF),
-  );
-}
-
-class FinChartAnimation {
-  static const Duration shortDuration = Duration(milliseconds: 300);
+  /// The height of the axis label
+  static final double axisLabelHeight = AppTypography.axisLabel.fontSize! * AppTypography.axisLabel.height!;
 }

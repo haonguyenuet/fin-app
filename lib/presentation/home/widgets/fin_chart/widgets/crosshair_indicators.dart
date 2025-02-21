@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-
 import 'package:fin_app/data/models/candle.dart';
+import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:fin_app/shared/extensions/double_ext.dart';
 import 'package:fin_app/shared/utils/format_util.dart';
-import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
 import 'package:fin_app/shared/widgets/dash_line.dart';
+import 'package:flutter/material.dart';
 
 class CrosshairIndicators extends StatelessWidget {
   const CrosshairIndicators({
@@ -187,7 +188,7 @@ class CrosshairIndicators extends StatelessWidget {
         width: intersectionSize,
         height: intersectionSize,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(intersectionSize / 2),
         ),
       ),
@@ -195,24 +196,18 @@ class CrosshairIndicators extends StatelessWidget {
   }
 
   Widget _buildSelectedCandleInfo({required Candle selectedCandle}) {
-    const infoTextStyle = TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: Colors.black,
-    );
-
     return Positioned(
       left: 10,
-      top: -16,
+      top: -12,
       right: FinChartDimens.rightAxisWidth,
       child: Wrap(
-        spacing: 10,
-        runSpacing: 10,
+        spacing: 8,
+        runSpacing: 8,
         children: [
-          Text('O: ${formatPrice(selectedCandle.open)}', style: infoTextStyle),
-          Text('H: ${formatPrice(selectedCandle.high)}', style: infoTextStyle),
-          Text('L: ${formatPrice(selectedCandle.low)}', style: infoTextStyle),
-          Text('C: ${formatPrice(selectedCandle.close)}', style: infoTextStyle),
+          Text('O: ${formatPrice(selectedCandle.open)}', style: AppTypography.bodySmall),
+          Text('H: ${formatPrice(selectedCandle.high)}', style: AppTypography.bodySmall),
+          Text('L: ${formatPrice(selectedCandle.low)}', style: AppTypography.bodySmall),
+          Text('C: ${formatPrice(selectedCandle.close)}', style: AppTypography.bodySmall),
         ],
       ),
     );
@@ -238,9 +233,12 @@ class _CrosshairTooltip extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: Colors.black,
+        color: AppColors.primary,
       ),
-      child: Text(text, style: FinChartTypo.tooltip),
+      child: Text(
+        text,
+        style: AppTypography.bodySmall.copyWith(color: AppColors.onPrimary),
+      ),
     );
   }
 }

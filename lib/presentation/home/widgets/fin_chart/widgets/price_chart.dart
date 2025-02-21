@@ -1,5 +1,8 @@
 import 'package:fin_app/data/models/candle.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/fin_chart_const.dart';
+import 'package:fin_app/shared/consts/app_animation.dart';
+import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:fin_app/shared/consts/app_typo.dart';
 import 'package:fin_app/shared/widgets/dash_line.dart';
 import 'package:fin_app/shared/utils/format_util.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +31,7 @@ class PriceChart extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Positioned.fill(
-          top: -(FinChartTypo.axisLabel.fontSize!),
+          top: -(FinChartDimens.axisLabelHeight),
           child: _PriceAxisGrid(
             viewportLowestPrice: viewportLowestPrice,
             viewportHighestPrice: viewportHighestPrice,
@@ -107,7 +110,7 @@ class _PriceAxisGrid extends StatelessWidget {
           child: Text(
             formatPrice(price),
             textAlign: TextAlign.center,
-            style: FinChartTypo.axisLabel,
+            style: AppTypography.axisLabel,
           ),
         ),
         Divider(),
@@ -117,8 +120,8 @@ class _PriceAxisGrid extends StatelessWidget {
 
   Widget _buildLatestIndicator({required double axisHeight}) {
     const indicatorHeight = 20.0;
-    final indicatorColor = latestCandle.isBull ? FinChartColors.bullColor : FinChartColors.bearColor;
-    final chartHeight = axisHeight - FinChartTypo.axisLabel.fontSize!;
+    final indicatorColor = latestCandle.isBull ? AppColors.bull : AppColors.bear;
+    final chartHeight = axisHeight - FinChartDimens.axisLabelHeight;
 
     final bottomPosition = _calculateLatestPricePosition(
       latestPrice: latestCandle.close,
@@ -130,7 +133,7 @@ class _PriceAxisGrid extends StatelessWidget {
       right: 0,
       left: 0,
       bottom: bottomPosition,
-      duration: FinChartAnimation.shortDuration,
+      duration: AppAnimation.shortDuration,
       child: Row(
         children: [
           Expanded(
@@ -146,7 +149,7 @@ class _PriceAxisGrid extends StatelessWidget {
             ),
             child: Text(
               formatPrice(latestCandle.close),
-              style: FinChartTypo.tooltip,
+              style: AppTypography.bodySmall.copyWith(color: AppColors.onPrimary),
             ),
           ),
         ],
@@ -214,7 +217,7 @@ class _CandlestickPainter extends CustomPainter {
     required double heightPerPrice,
   }) {
     final paint = Paint()
-      ..color = candle.isBull ? FinChartColors.bullColor : FinChartColors.bearColor
+      ..color = candle.isBull ? AppColors.bull : AppColors.bear
       ..style = PaintingStyle.stroke;
 
     final x = size.width - (index + 0.5) * candleWidth;

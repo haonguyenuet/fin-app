@@ -6,6 +6,7 @@ import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/crosshair_in
 import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/date_axis_grid.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/price_chart.dart';
 import 'package:fin_app/presentation/home/widgets/fin_chart/widgets/volume_chart.dart';
+import 'package:fin_app/shared/consts/app_animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,7 +48,7 @@ class _FinChartState extends ConsumerState<FinChart> {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
       tween: Tween(begin: _prevCandleWidth, end: _targetCandleWidth),
-      duration: FinChartAnimation.shortDuration,
+      duration: AppAnimation.shortDuration,
       builder: (context, candleWidth, child) {
         return LayoutBuilder(builder: (context, constraints) {
           /// Calculate the viewport dimensions, [viewport] is the area where the chart that users can see.
