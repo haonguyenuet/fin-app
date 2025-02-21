@@ -2,6 +2,7 @@ List<MarketSymbol> parseMarketSymbols(List<dynamic> symbols) {
   return symbols.map((e) => MarketSymbol.fromMap(e)).where((e) => e.quoteAsset.toUpperCase() == 'USDT').toList();
 }
 
+/// This data represents a trading pair on the exchange.
 class MarketSymbol {
   MarketSymbol({
     required this.value,
@@ -12,12 +13,13 @@ class MarketSymbol {
   final String value;
   final String baseAsset;
   final String quoteAsset;
-  SymbolSnapshot? snapshot;
 
   String get name => '$baseAsset/$quoteAsset';
 
+  SymbolSnapshot? _snapshot;
+  SymbolSnapshot? get snapshot => _snapshot;
   void updateSnapshot(SymbolSnapshot snapshot) {
-    this.snapshot = snapshot;
+    _snapshot = snapshot;
   }
 
   factory MarketSymbol.fromMap(Map<String, dynamic> map) {
@@ -29,6 +31,7 @@ class MarketSymbol {
   }
 }
 
+/// This data is a snapshot of the symbol's state over the last 24hr.
 class SymbolSnapshot {
   SymbolSnapshot({
     required this.symbol,

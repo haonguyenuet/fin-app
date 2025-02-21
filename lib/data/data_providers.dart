@@ -33,6 +33,7 @@ final streamingServiceProvider = Provider<StreamingService>((ref) {
 final marketRepository = Provider(
   (ref) => MarketRepository(
     ref.read(marketApiService),
+    ref.read(streamingServiceProvider),
   ),
 );
 
