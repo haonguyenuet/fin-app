@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-List<CryptoSymbol> parseSymbols(String body) {
+List<CryptoSymbol> parseCryptoSymbols(String body) {
   final map = jsonDecode(body) as Map<String, dynamic>;
   final symbols = map['symbols'] as List<dynamic>;
-  return symbols.map((e) => CryptoSymbol.fromMap(e)).toList();
+  return symbols.map((e) => CryptoSymbol.fromMap(e)).where((e) => e.quoteAsset.toUpperCase() == 'USDT').toList();
 }
 
 class CryptoSymbol {

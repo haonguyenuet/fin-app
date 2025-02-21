@@ -53,7 +53,7 @@ class BinancesCryptoRepository implements CryptoRepository {
     try {
       final uri = Uri.parse("$apiUrl/exchangeInfo");
       final res = await http.get(uri);
-      return compute(parseSymbols, res.body);
+      return compute(parseCryptoSymbols, res.body);
     } catch (e) {
       print("Error: $e");
       return [];
