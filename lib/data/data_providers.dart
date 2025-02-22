@@ -24,7 +24,7 @@ final candlestickApiService = Provider<CandlestickApiService>(
 final streamingServiceProvider = Provider<StreamingService>((ref) {
   final wsService = WebsocketService(wsUrl: 'wss://stream.binance.com:9443/ws');
   wsService.connect();
-  ref.onDispose(() => wsService.disconnect());
+  ref.onDispose(() => wsService.close());
   return wsService;
 });
 

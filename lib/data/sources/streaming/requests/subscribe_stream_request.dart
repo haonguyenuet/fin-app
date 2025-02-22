@@ -5,6 +5,7 @@ class SubscribeStreamRequest {
 
   Map<String, dynamic> toMap() {
     return {
+      "id": DateTime.now().millisecondsSinceEpoch,
       "method": "SUBSCRIBE",
       "params": streamNames,
     };

@@ -4,7 +4,9 @@ import 'package:fin_app/data/models/time_interval.dart';
 
 abstract class StreamingService {
   void connect();
+  void reconnect();
   void disconnect();
+  void close();
 
   /// =============================== Kline/Candlestick Streams ===============================
   ///
@@ -22,7 +24,7 @@ abstract class StreamingService {
   /// but a 24hr rolling window from requestTime to 24hrs before.
   Stream<SymbolMiniTickerEvent> get symbolMiniTickerStream;
 
-  void subscribeSymbolMiniTickerStream({required List<String> symbols});
+  Future<bool> subscribeSymbolMiniTickerStream({required List<String> symbols});
 
-  void unsubscribeSymbolMiniTickerStream({required List<String> symbols});
+  Future<bool> unsubscribeSymbolMiniTickerStream({required List<String> symbols});
 }
