@@ -3,6 +3,7 @@ import 'package:fin_app/data/models/symbol.dart';
 import 'package:fin_app/data/repositories/base_repository.dart';
 import 'package:fin_app/data/sources/networking/services/market_api_service.dart';
 import 'package:fin_app/data/sources/streaming/streaming_service.dart';
+import 'package:fin_app/shared/extensions/interable_ext.dart';
 
 class MarketRepository extends BaseRepository {
   MarketRepository(MarketApiService apiService, StreamingService streamingService)
@@ -33,18 +34,18 @@ class MarketRepository extends BaseRepository {
     // If data is available, filter symbols that have USDT as the quote asset
     if (allSymbols != null) {
       final usdtSymbols = allSymbols.where((e) => e.quoteAsset.toUpperCase() == 'USDT').toList();
-      return {for (final symbol in usdtSymbols) symbol.value: symbol};
+      return usdtSymbols.associateBy(keySelector: (symbol) => symbol.id);
     }
     return {};
   }
 
   Stream<SymbolMiniTickerEvent> get symbolMiniTickerStream => _streamingService.symbolMiniTickerStream;
 
-  void subscribeSymbolMiniTickerStream({required List<String> symbols}) {
-    _streamingService.subscribeSymbolMiniTickerStream(symbols: symbols);
+  Future<bool> subscribeSymbolMiniTickerStream({required List<MarketSymbol> symbols}) {
+    return _streamingService.subscribeSymbolMiniTickerStream(symbols: symbols.map((s) => s.id).toList());
   }
 
-  void unsubscribeSymbolMiniTickerStream({required List<String> symbols}) {
-    _streamingService.unsubscribeSymbolMiniTickerStream(symbols: symbols);
+  Future<bool> unsubscribeSymbolMiniTickerStream({required List<MarketSymbol> symbols}) {
+    return _streamingService.unsubscribeSymbolMiniTickerStream(symbols: symbols.map((s) => s.id).toList());
   }
 }

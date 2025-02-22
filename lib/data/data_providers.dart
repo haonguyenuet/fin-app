@@ -13,11 +13,11 @@ final dioClientProvider = Provider<DioClient>(
   (ref) => DioClient(baseUrl: 'https://api.binance.com/api/v3'),
 );
 
-final marketApiService = Provider<MarketApiService>(
+final marketApiServiceProvider = Provider<MarketApiService>(
   (ref) => MarketApiService(ref.read(dioClientProvider)),
 );
 
-final candlestickApiService = Provider<CandlestickApiService>(
+final candlestickApiServiceProvider = Provider<CandlestickApiService>(
   (ref) => CandlestickApiService(ref.read(dioClientProvider)),
 );
 
@@ -30,16 +30,16 @@ final streamingServiceProvider = Provider<StreamingService>((ref) {
 
 /// =============================== REPOSITORIES ===============================
 
-final marketRepository = Provider(
+final marketRepositoryProvider = Provider(
   (ref) => MarketRepository(
-    ref.read(marketApiService),
+    ref.read(marketApiServiceProvider),
     ref.read(streamingServiceProvider),
   ),
 );
 
-final candlestickRepository = Provider(
+final candlestickRepositoryProvider = Provider(
   (ref) => CandlestickRepository(
-    ref.read(candlestickApiService),
+    ref.read(candlestickApiServiceProvider),
     ref.read(streamingServiceProvider),
   ),
 );

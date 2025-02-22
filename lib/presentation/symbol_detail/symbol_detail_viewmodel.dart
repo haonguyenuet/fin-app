@@ -11,8 +11,8 @@ import 'package:riverpod/riverpod.dart';
 
 final symbolDetailVMProvider = StateNotifierProvider.autoDispose<SymbolDetailViewModel, SymbolDetailState>((ref) {
   return SymbolDetailViewModel(
-    ref.read(marketRepository),
-    ref.read(candlestickRepository),
+    ref.read(marketRepositoryProvider),
+    ref.read(candlestickRepositoryProvider),
   );
 });
 
@@ -54,11 +54,11 @@ class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
     final interval = state.currentInterval;
     if (symbol == null || interval == null) return;
 
-    _candlestickRepository.unsubscribeCandlestickStream(symbol: symbol.value, interval: interval);
-    final candles = await _candlestickRepository.fetchCandles(symbol: symbol.value, interval: interval);
+    _candlestickRepository.unsubscribeCandlestickStream(symbol: symbol.id, interval: interval);
+    final candles = await _candlestickRepository.fetchCandles(symbol: symbol.id, interval: interval);
     if (candles.isNotEmpty) {
       state = state.copyWith(candles: candles);
-      _candlestickRepository.subscribeCandlestickStream(symbol: symbol.value, interval: interval);
+      _candlestickRepository.subscribeCandlestickStream(symbol: symbol.id, interval: interval);
     }
   }
 
@@ -98,7 +98,7 @@ class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
     if (candles == null || candles.isEmpty || symbol == null || interval == null) return;
 
     final newCandles = await _candlestickRepository.fetchCandles(
-      symbol: symbol.value,
+      symbol: symbol.id,
       interval: interval,
       endTime: candles.last.date.millisecondsSinceEpoch + 1,
     );

@@ -58,7 +58,7 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
 
   void _onSearch(query) {
     setState(() {
-      filteredSymbols = allSymbols.where((symbol) => symbol.value.toLowerCase().contains(query.toLowerCase())).toList();
+      filteredSymbols = allSymbols.where((symbol) => symbol.id.toLowerCase().contains(query.toLowerCase())).toList();
     });
   }
 

@@ -158,7 +158,6 @@ class WebsocketService implements StreamingService {
 
   @override
   void disconnect() {
-    // Return false for all pending requests and clear the map
     for (final completer in _pendingRequests.values) {
       completer.complete(false);
     }

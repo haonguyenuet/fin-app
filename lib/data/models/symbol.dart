@@ -5,12 +5,12 @@ List<MarketSymbol> parseMarketSymbols(List<dynamic> symbols) {
 /// This data represents a trading pair on the exchange.
 class MarketSymbol {
   MarketSymbol({
-    required this.value,
+    required this.id,
     required this.baseAsset,
     required this.quoteAsset,
   });
 
-  final String value;
+  final String id;
   final String baseAsset;
   final String quoteAsset;
 
@@ -24,7 +24,7 @@ class MarketSymbol {
 
   factory MarketSymbol.fromMap(Map<String, dynamic> map) {
     return MarketSymbol(
-      value: map['symbol'],
+      id: map['symbol'],
       baseAsset: map['baseAsset'],
       quoteAsset: map['quoteAsset'],
     );
@@ -35,31 +35,37 @@ class MarketSymbol {
 class SymbolSnapshot {
   SymbolSnapshot({
     required this.symbol,
+    required this.openPrice,
     required this.lastPrice,
-    required this.priceChange,
-    required this.priceChangePercent,
     required this.highPrice,
     required this.lowPrice,
-    required this.volume,
+    required this.priceChange,
+    required this.priceChangePercent,
+    required this.baseVolume,
+    required this.quoteVolume,
   });
 
   final String symbol;
   final double lastPrice;
-  final double priceChange;
-  final double priceChangePercent;
+  final double openPrice;
   final double highPrice;
   final double lowPrice;
-  final double volume;
+  final double priceChange;
+  final double priceChangePercent;
+  final double baseVolume;
+  final double quoteVolume;
 
   factory SymbolSnapshot.fromMap(Map<String, dynamic> map) {
     return SymbolSnapshot(
       symbol: map['symbol'],
       lastPrice: double.parse(map['lastPrice']),
-      priceChange: double.parse(map['priceChange']),
-      priceChangePercent: double.parse(map['priceChangePercent']),
+      openPrice: double.parse(map['openPrice']),
       highPrice: double.parse(map['highPrice']),
       lowPrice: double.parse(map['lowPrice']),
-      volume: double.parse(map['volume']),
+      priceChange: double.parse(map['priceChange']),
+      priceChangePercent: double.parse(map['priceChangePercent']),
+      baseVolume: double.parse(map['volume']),
+      quoteVolume: double.parse(map['quoteVolume']),
     );
   }
 }

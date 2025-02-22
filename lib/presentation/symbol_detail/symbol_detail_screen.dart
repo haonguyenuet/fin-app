@@ -52,7 +52,7 @@ class _SymbolDetailState extends ConsumerState<SymbolDetailScreen> {
                 SizedBox(height: 40),
                 Expanded(
                   child: FinChart(
-                    key: Key(currentSymbol!.value + currentInterval!.value),
+                    key: Key(currentSymbol!.id + currentInterval!.value),
                     candles: candles,
                     onFetchMoreCandles: () async {
                       await ref.read(symbolDetailVMProvider.notifier).fetchMoreCandles();

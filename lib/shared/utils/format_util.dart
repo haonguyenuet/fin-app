@@ -2,16 +2,12 @@ import 'package:fin_app/shared/extensions/double_ext.dart';
 
 String formatPrice(double price) {
   int decimalPlaces;
-  if (price.abs() > 1000) {
+  if (price.abs() > 10) {
     decimalPlaces = 2;
-  } else if (price.abs() > 100) {
-    decimalPlaces = 3;
-  } else if (price.abs() > 10) {
+  }  else if (price.abs() > 1) {
     decimalPlaces = 4;
-  } else if (price.abs() > 1) {
-    decimalPlaces = 5;
   } else {
-    decimalPlaces = 7;
+    decimalPlaces = 6;
   }
 
   return price.formatWithThousandSeparator(maximumFractionDigits: decimalPlaces);

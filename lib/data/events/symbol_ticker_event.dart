@@ -30,21 +30,23 @@ class SymbolMiniTickerEvent {
   final String eventType;
   final int eventTime;
   final String symbol;
-  final String closePrice;
-  final String openPrice;
-  final String highPrice;
-  final String lowPrice;
-  final String totalTradedBaseAssetVolume;
-  final String totalTradedQuoteAssetVolume;
+  final double closePrice;
+  final double openPrice;
+  final double highPrice;
+  final double lowPrice;
+  final double totalTradedBaseAssetVolume;
+  final double totalTradedQuoteAssetVolume;
 
   SymbolSnapshot get snapshot => SymbolSnapshot(
         symbol: symbol,
-        lastPrice: double.parse(closePrice),
-        priceChange: double.parse(closePrice) - double.parse(openPrice),
-        priceChangePercent: (double.parse(closePrice) - double.parse(openPrice)) / double.parse(openPrice) * 100,
-        highPrice: double.parse(highPrice),
-        lowPrice: double.parse(lowPrice),
-        volume: double.parse(totalTradedBaseAssetVolume),
+        lastPrice: closePrice,
+        openPrice: openPrice,
+        highPrice: highPrice,
+        lowPrice: lowPrice,
+        priceChange: closePrice - openPrice,
+        priceChangePercent: (closePrice - openPrice) / openPrice * 100,
+        baseVolume: totalTradedBaseAssetVolume,
+        quoteVolume: totalTradedQuoteAssetVolume,
       );
 
   factory SymbolMiniTickerEvent.fromMap(Map<String, dynamic> map) {
@@ -52,12 +54,12 @@ class SymbolMiniTickerEvent {
       eventType: map['e'],
       eventTime: map['E'],
       symbol: map['s'],
-      closePrice: map['c'],
-      openPrice: map['o'],
-      highPrice: map['h'],
-      lowPrice: map['l'],
-      totalTradedBaseAssetVolume: map['v'],
-      totalTradedQuoteAssetVolume: map['q'],
+      closePrice: double.parse(map['c']),
+      openPrice: double.parse(map['o']),
+      highPrice: double.parse(map['h']),
+      lowPrice: double.parse(map['l']),
+      totalTradedBaseAssetVolume: double.parse(map['v']),
+      totalTradedQuoteAssetVolume: double.parse(map['q']),
     );
   }
 }
