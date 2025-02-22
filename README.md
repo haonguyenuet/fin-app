@@ -1,26 +1,26 @@
 # FinApp
 
-A **self-built** financial app in Flutter, crafted from scratch without using third-party charting packages. Inspired by **Binance App**, this project focuses on building an elegant yet minimal UI while handling **real-time price updates** using Binance API. Every pixel, every interaction had to be **manually calculated and optimized**.
+My personal playground in Flutter, built from scratch to tinker with candlestick charts and real-time Binance API data without using charting packages. Inspired by **Binance App**, this project delivers an elegant, minimalist UI. Every pixel, every interaction had to be **manually calculated and optimized**.
 
 ## 1. Key Features
 
-- ✅ **Self-built candlestick chart** – No dependencies, fully control rendering with drag, zoom and crosshairs
-- ✅ **Large dataset** - Ensures good performance on heavy data
+- ✅ **Self-built Candlestick Chart** – No dependencies. Drag, zoom, and crosshairs, all crafted by hand
+- ✅ **Large Dataset** - Ensures good performance on heavy data
 - ✅ **Live Chart Updates** – Real-time candlestick data with smooth animations
 - ⏳ **Live Symbol List** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
-- ⏳ **Technical indicators** – Planned enhancements for moving averages and trend lines
+- ⏳ **Technical Indicators** – Upcoming enhancements featuring moving averages and trend lines for deeper market analysis.
 
 ## 2. The Challenge
 
 ### 2.1 Candlestick Chart
 
-Building a candlestick chart from scratch is far from simple. Unlike static UI components, a candlestick chart requires:  
+Crafting a candlestick chart from scratch is far from simple. Unlike static UI components, a candlestick chart requires:  
 
 - **Optimized Rendering** – To optimize performance, the chart must avoid drawing off-screen elements. Every candle, grid line, and label should be conditionally drawn based on the viewport.
-- **Precise coordinate mapping** – Each price movement must be accurately translated into screen coordinates.
-- **Efficient data handling** – Keeping performance smooth even with thousands of candles.
-- **Real-time updates** – Ensuring smooth animations and preventing UI lag.  
-- **Touch gestures** – Pinch-to-zoom, crosshairs, and dynamic scaling.
+- **Precision Coordinate Translation** – Each price movement must be accurately translated into screen coordinates.
+- **Robust Data Optimization** – Keeping performance smooth even with thousands of candles.
+- **Real-time Updates** – Ensuring smooth animations and preventing UI lag.  
+- **Touch Interactions** – Pinch-to-zoom, crosshairs, and dynamic scaling.
 
 This required deep optimization techniques, manual calculations, and careful use of **Flutter's CustomPainter** to keep performance smooth without relying on external libraries.  
 
