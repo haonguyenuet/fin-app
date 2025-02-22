@@ -22,13 +22,15 @@ class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
   final MarketRepository _marketRepository;
   final CandlestickRepository _candlestickRepository;
 
+  StreamSubscription? _candlestickStreamSubscription;
+
   void init() async {
     await _fetchSymbols();
     await _fetchIntervals();
     _fetchNewCandles();
 
     /// Websocket streams handling
-    _candlestickRepository.candlestickStream.listen(_onCandlestickEvent);
+    _candlestickStreamSubscription = _candlestickRepository.candlestickStream.listen(_onCandlestickEvent);
   }
 
   Future<void> _fetchSymbols() async {
@@ -104,6 +106,12 @@ class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
     if (newCandles.length > 1) {
       state = state.copyWith(candles: [...candles, ...newCandles]);
     }
+  }
+
+  @override
+  void dispose() {
+    _candlestickStreamSubscription?.cancel();
+    super.dispose();
   }
 }
 
