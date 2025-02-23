@@ -21,7 +21,9 @@ class MarketRepository extends BaseRepository {
     // If snapshot data is available, update the corresponding market symbols
     if (snapshots != null) {
       for (final snapshot in snapshots) {
-        exchangeInfo[snapshot.symbol]?.updateSnapshot(snapshot);
+        if (exchangeInfo.containsKey(snapshot.symbol)) {
+          exchangeInfo[snapshot.symbol] = exchangeInfo[snapshot.symbol]!.copyWith(snapshot: snapshot);
+        }
       }
     }
     return exchangeInfo.values.toList();
@@ -41,11 +43,11 @@ class MarketRepository extends BaseRepository {
 
   Stream<SymbolMiniTickerEvent> get symbolMiniTickerStream => _streamingService.symbolMiniTickerStream;
 
-  Future<bool> subscribeSymbolMiniTickerStream({required List<MarketSymbol> symbols}) {
-    return _streamingService.subscribeSymbolMiniTickerStream(symbols: symbols.map((s) => s.id).toList());
+  Future<bool> subscribeSymbolMiniTickerStream({required List<String> symbols}) {
+    return _streamingService.subscribeSymbolMiniTickerStream(symbols: symbols);
   }
 
-  Future<bool> unsubscribeSymbolMiniTickerStream({required List<MarketSymbol> symbols}) {
-    return _streamingService.unsubscribeSymbolMiniTickerStream(symbols: symbols.map((s) => s.id).toList());
+  Future<bool> unsubscribeSymbolMiniTickerStream({required List<String> symbols}) {
+    return _streamingService.unsubscribeSymbolMiniTickerStream(symbols: symbols);
   }
 }

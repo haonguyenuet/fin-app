@@ -19,6 +19,7 @@ class Application extends StatelessWidget {
     return ThemeData(
       colorScheme: ColorScheme.light(
         surface: AppColors.background,
+        surfaceTint: AppColors.background,
         onSurface: AppColors.foreground,
         primary: AppColors.primary,
         onPrimary: AppColors.onPrimary,

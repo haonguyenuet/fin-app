@@ -7,7 +7,7 @@ import 'package:fin_app/data/repositories/market_repository.dart';
 import 'package:fin_app/shared/extensions/interable_ext.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final marketVMProvider = StateNotifierProvider<MarketViewmodel, MarketState>((ref) {
+final marketVMProvider = StateNotifierProvider.autoDispose<MarketViewmodel, MarketState>((ref) {
   final marketRepository = ref.watch(marketRepositoryProvider);
   return MarketViewmodel(marketRepository);
 });
@@ -18,6 +18,7 @@ class MarketViewmodel extends StateNotifier<MarketState> {
   final MarketRepository _marketRepository;
 
   StreamSubscription? _miniTickerStreamSubscription;
+  Set<String> _currentSubscribedSymbolIds = {};
 
   void init() async {
     _fetchSymbols();
@@ -35,15 +36,40 @@ class MarketViewmodel extends StateNotifier<MarketState> {
     });
 
     state = state.copyWith(
-      symbolIds: symbols.map((symbol) => symbol.id).toList(),
+      symbolIds: symbols.map((symbol) => symbol.id).toSet(),
       symbolMap: symbols.associateBy(keySelector: (symbol) => symbol.id),
     );
   }
 
   void _onMiniTickerEvent(SymbolMiniTickerEvent event) {
-    final updatedSymbolMap = Map.of(state.symbolMap);
-    updatedSymbolMap[event.symbol]?.updateSnapshot(event.snapshot);
-    state = state.copyWith(symbolMap: updatedSymbolMap);
+    final symbol = state.symbolMap[event.symbol];
+    if (symbol != null && symbol.snapshot?.lastPrice != event.snapshot.lastPrice) {
+      state = state.copyWith(
+        symbolMap: {
+          ...state.symbolMap,
+          symbol.id: symbol.copyWith(snapshot: event.snapshot),
+        },
+      );
+    }
+  }
+
+  void trackPriceOf(Set<String> symbolIds) async {
+    /// Unsubscribe from symbols that are not in the new list
+    final symbolIdsToUnsubscribe = _currentSubscribedSymbolIds.where((s) => !symbolIds.contains(s)).toList();
+
+    /// Subscribe to symbols that are not in the current list, overlapping symbols will be ignored
+    final symbolIdsToSubscribe = symbolIds.where((s) => !_currentSubscribedSymbolIds.contains(s)).toList();
+
+    if (symbolIdsToUnsubscribe.isNotEmpty) {
+      _marketRepository.unsubscribeSymbolMiniTickerStream(symbols: symbolIdsToUnsubscribe);
+    }
+
+    if (symbolIdsToSubscribe.isNotEmpty) {
+      final isSuccess = await _marketRepository.subscribeSymbolMiniTickerStream(symbols: symbolIdsToSubscribe);
+      if (isSuccess) {
+        _currentSubscribedSymbolIds = symbolIds;
+      }
+    }
   }
 
   @override
@@ -55,15 +81,15 @@ class MarketViewmodel extends StateNotifier<MarketState> {
 
 class MarketState {
   MarketState({
-    this.symbolIds = const [],
+    this.symbolIds = const {},
     this.symbolMap = const {},
   });
 
-  final List<String> symbolIds;
+  final Set<String> symbolIds;
   final Map<String, MarketSymbol> symbolMap;
 
   MarketState copyWith({
-    List<String>? symbolIds,
+    Set<String>? symbolIds,
     Map<String, MarketSymbol>? symbolMap,
   }) {
     return MarketState(

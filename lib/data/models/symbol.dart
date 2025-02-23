@@ -8,18 +8,28 @@ class MarketSymbol {
     required this.id,
     required this.baseAsset,
     required this.quoteAsset,
+    this.snapshot,
   });
 
   final String id;
   final String baseAsset;
   final String quoteAsset;
+  final SymbolSnapshot? snapshot;
 
   String get name => '$baseAsset/$quoteAsset';
 
-  SymbolSnapshot? _snapshot;
-  SymbolSnapshot? get snapshot => _snapshot;
-  void updateSnapshot(SymbolSnapshot snapshot) {
-    _snapshot = snapshot;
+  MarketSymbol copyWith({
+    String? id,
+    String? baseAsset,
+    String? quoteAsset,
+    SymbolSnapshot? snapshot,
+  }) {
+    return MarketSymbol(
+      id: id ?? this.id,
+      baseAsset: baseAsset ?? this.baseAsset,
+      quoteAsset: quoteAsset ?? this.quoteAsset,
+      snapshot: snapshot ?? this.snapshot,
+    );
   }
 
   factory MarketSymbol.fromMap(Map<String, dynamic> map) {
