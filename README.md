@@ -4,10 +4,10 @@ My personal playground in Flutter, built from scratch to tinker with candlestick
 
 ## 1. Key Features
 
-- ✅ **Self-built Candlestick Chart** – No dependencies. Drag, zoom, and crosshairs, all crafted by hand
+- ✅ **Live Symbol List** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
 - ✅ **Large Dataset** - Ensures good performance on heavy data
+- ✅ **Self-built Candlestick Chart** – No dependencies. Drag, zoom, and crosshairs, all crafted by hand
 - ✅ **Live Chart Updates** – Real-time candlestick data with smooth animations
-- ⏳ **Live Symbol List** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
 - ⏳ **Technical Indicators** – Upcoming enhancements featuring moving averages and trend lines for deeper market analysis.
 
 ## 2. The Challenge
@@ -42,13 +42,17 @@ This required deep optimization techniques, manual calculations, and careful use
 
 ## 4. Screenshots
 
-| Crosshair Indicators | ZoomOut |
+| Live Market | Crosshairs |
 |---|---|
-| ![Symbol Picker](screenshots/crosshair_sc.png) | ![Interval Picker](screenshots/zoom_out_sc.png) |
+| ![Screenshot1](screenshots/market_sc.png) | ![Screenshot2](screenshots/crosshair_sc.png) |
+
+| Zoom In | Zoom Out |
+|---|---|
+| ![Screenshot3](screenshots/zoom_in_sc.png) | ![Screenshot4](screenshots/zoom_out_sc.png) |
 
 | Symbol Picker | Interval Picker |
 |---|---|
-| ![Symbol Picker](screenshots/symbol_picker_sc.png) | ![Interval Picker](screenshots/interval_picker_sc.png) |
+| ![Screenshot3](screenshots/symbol_picker_sc.png) | ![Screenshot4](screenshots/interval_picker_sc.png) |
 
 ---
 
