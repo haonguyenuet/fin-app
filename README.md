@@ -42,9 +42,9 @@ This required deep optimization techniques, manual calculations, and careful use
 
 ## 4. Screenshots
 
-| Live Market | Crosshairs |
+| LiveMarket | Crosshairs |
 |---|---|
-| ![Screenshot1](screenshots/market_sc.png) | ![Screenshot2](screenshots/crosshair_sc.png) |
+| ![Screenshot1](screenshots/market_sc.png)  | ![Screenshot2](screenshots/crosshair_sc.png) |
 
 | Zoom In | Zoom Out |
 |---|---|
