@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:fin_app/data/data_providers.dart';
-import 'package:fin_app/data/events/symbol_ticker_event.dart';
-import 'package:fin_app/data/models/symbol.dart';
-import 'package:fin_app/data/repositories/market_repository.dart';
-import 'package:fin_app/shared/extensions/interable_ext.dart';
+import 'package:market_stream/data/data_providers.dart';
+import 'package:market_stream/data/events/symbol_ticker_event.dart';
+import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/data/repositories/market_repository.dart';
+import 'package:market_stream/shared/extensions/interable_ext.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final marketVMProvider = StateNotifierProvider.autoDispose<MarketViewmodel, MarketState>((ref) {

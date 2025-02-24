@@ -1,9 +1,9 @@
-import 'package:fin_app/data/events/candlestick_event.dart';
-import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/data/repositories/base_repository.dart';
-import 'package:fin_app/data/sources/networking/services/candlestick_api_service.dart';
-import 'package:fin_app/data/sources/streaming/streaming_service.dart';
+import 'package:market_stream/data/events/candlestick_event.dart';
+import 'package:market_stream/data/models/candle.dart';
+import 'package:market_stream/data/models/time_interval.dart';
+import 'package:market_stream/data/repositories/base_repository.dart';
+import 'package:market_stream/data/sources/networking/services/candlestick_api_service.dart';
+import 'package:market_stream/data/sources/streaming/streaming_service.dart';
 
 class CandlestickRepository extends BaseRepository {
   CandlestickRepository(CandlestickApiService apiService, StreamingService streamingService)

@@ -1,9 +1,9 @@
-import 'package:fin_app/data/models/symbol.dart';
-import 'package:fin_app/presentation/market/market_viewmodel.dart';
-import 'package:fin_app/shared/consts/app_color.dart';
-import 'package:fin_app/shared/consts/app_typo.dart';
-import 'package:fin_app/shared/extensions/double_ext.dart';
-import 'package:fin_app/shared/utils/format_util.dart';
+import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/presentation/market/market_viewmodel.dart';
+import 'package:market_stream/shared/consts/app_color.dart';
+import 'package:market_stream/shared/consts/app_typo.dart';
+import 'package:market_stream/shared/extensions/double_ext.dart';
+import 'package:market_stream/shared/utils/format_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

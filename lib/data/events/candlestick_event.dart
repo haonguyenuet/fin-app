@@ -1,4 +1,4 @@
-import 'package:fin_app/data/models/candle.dart';
+import 'package:market_stream/data/models/candle.dart';
 
 /// Sample Data:
 ///

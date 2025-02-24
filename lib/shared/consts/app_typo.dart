@@ -1,4 +1,4 @@
-import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:market_stream/shared/consts/app_color.dart';
 import 'package:flutter/widgets.dart';
 
 class AppTypography {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fin_app/data/sources/networking/interceptors/log_interceptor.dart';
+import 'package:market_stream/data/sources/networking/interceptors/log_interceptor.dart';
 
 class DioClient {
   DioClient({required String baseUrl}) {

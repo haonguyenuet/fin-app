@@ -1,5 +1,5 @@
-import 'package:fin_app/presentation/market/market_screen.dart';
-import 'package:fin_app/shared/consts/app_color.dart';
+import 'package:market_stream/presentation/market/market_screen.dart';
+import 'package:market_stream/shared/consts/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

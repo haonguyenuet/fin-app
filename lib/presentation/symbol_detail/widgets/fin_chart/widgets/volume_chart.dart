@@ -1,8 +1,8 @@
-import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/fin_chart_const.dart';
-import 'package:fin_app/shared/consts/app_color.dart';
-import 'package:fin_app/shared/consts/app_typo.dart';
-import 'package:fin_app/shared/extensions/double_ext.dart';
+import 'package:market_stream/data/models/candle.dart';
+import 'package:market_stream/presentation/symbol_detail/widgets/fin_chart/fin_chart_const.dart';
+import 'package:market_stream/shared/consts/app_color.dart';
+import 'package:market_stream/shared/consts/app_typo.dart';
+import 'package:market_stream/shared/extensions/double_ext.dart';
 import 'package:flutter/material.dart';
 
 class VolumeChart extends StatelessWidget {

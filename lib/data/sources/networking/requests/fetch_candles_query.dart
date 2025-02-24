@@ -1,4 +1,4 @@
-import 'package:fin_app/data/models/time_interval.dart';
+import 'package:market_stream/data/models/time_interval.dart';
 
 class FetchCandlesQuery {
   final String symbol;

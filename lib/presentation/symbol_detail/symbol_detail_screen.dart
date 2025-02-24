@@ -1,7 +1,7 @@
-import 'package:fin_app/presentation/symbol_detail/widgets/fin_chart/fin_chart.dart';
-import 'package:fin_app/presentation/symbol_detail/symbol_detail_viewmodel.dart';
-import 'package:fin_app/presentation/symbol_detail/widgets/interval_picker.dart';
-import 'package:fin_app/presentation/symbol_detail/widgets/symbol_picker.dart';
+import 'package:market_stream/presentation/symbol_detail/widgets/fin_chart/fin_chart.dart';
+import 'package:market_stream/presentation/symbol_detail/symbol_detail_viewmodel.dart';
+import 'package:market_stream/presentation/symbol_detail/widgets/interval_picker.dart';
+import 'package:market_stream/presentation/symbol_detail/widgets/symbol_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,7 +1,7 @@
-import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/data/sources/networking/dio_client.dart';
-import 'package:fin_app/data/sources/networking/requests/fetch_candles_query.dart';
+import 'package:market_stream/data/models/candle.dart';
+import 'package:market_stream/data/models/time_interval.dart';
+import 'package:market_stream/data/sources/networking/dio_client.dart';
+import 'package:market_stream/data/sources/networking/requests/fetch_candles_query.dart';
 
 class CandlestickApiService {
   CandlestickApiService(DioClient dioClient) : _dioClient = dioClient;

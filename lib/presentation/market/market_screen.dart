@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fin_app/presentation/market/market_viewmodel.dart';
-import 'package:fin_app/presentation/market/widgets/market_symbol_row.dart';
-import 'package:fin_app/shared/extensions/global_key_ext.dart';
+import 'package:market_stream/presentation/market/market_viewmodel.dart';
+import 'package:market_stream/presentation/market/widgets/market_symbol_row.dart';
+import 'package:market_stream/shared/extensions/global_key_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

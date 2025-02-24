@@ -1,8 +1,8 @@
-import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/presentation/symbol_detail/symbol_detail_viewmodel.dart';
-import 'package:fin_app/shared/consts/app_color.dart';
-import 'package:fin_app/shared/consts/app_typo.dart';
-import 'package:fin_app/shared/widgets/bottom_sheet_handle.dart';
+import 'package:market_stream/data/models/time_interval.dart';
+import 'package:market_stream/presentation/symbol_detail/symbol_detail_viewmodel.dart';
+import 'package:market_stream/shared/consts/app_color.dart';
+import 'package:market_stream/shared/consts/app_typo.dart';
+import 'package:market_stream/shared/widgets/bottom_sheet_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

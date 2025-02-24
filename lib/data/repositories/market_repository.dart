@@ -1,9 +1,9 @@
-import 'package:fin_app/data/events/symbol_ticker_event.dart';
-import 'package:fin_app/data/models/symbol.dart';
-import 'package:fin_app/data/repositories/base_repository.dart';
-import 'package:fin_app/data/sources/networking/services/market_api_service.dart';
-import 'package:fin_app/data/sources/streaming/streaming_service.dart';
-import 'package:fin_app/shared/extensions/interable_ext.dart';
+import 'package:market_stream/data/events/symbol_ticker_event.dart';
+import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/data/repositories/base_repository.dart';
+import 'package:market_stream/data/sources/networking/services/market_api_service.dart';
+import 'package:market_stream/data/sources/streaming/streaming_service.dart';
+import 'package:market_stream/shared/extensions/interable_ext.dart';
 
 class MarketRepository extends BaseRepository {
   MarketRepository(MarketApiService apiService, StreamingService streamingService)

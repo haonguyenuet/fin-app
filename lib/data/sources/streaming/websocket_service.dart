@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fin_app/data/events/ack_event.dart';
-import 'package:fin_app/data/events/candlestick_event.dart';
-import 'package:fin_app/data/events/symbol_ticker_event.dart';
-import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/data/sources/streaming/requests/subscribe_stream_request.dart';
-import 'package:fin_app/data/sources/streaming/requests/unsubscribe_stream_request.dart';
-import 'package:fin_app/data/sources/streaming/streaming_service.dart';
+import 'package:market_stream/data/events/ack_event.dart';
+import 'package:market_stream/data/events/candlestick_event.dart';
+import 'package:market_stream/data/events/symbol_ticker_event.dart';
+import 'package:market_stream/data/models/time_interval.dart';
+import 'package:market_stream/data/sources/streaming/requests/subscribe_stream_request.dart';
+import 'package:market_stream/data/sources/streaming/requests/unsubscribe_stream_request.dart';
+import 'package:market_stream/data/sources/streaming/streaming_service.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 // https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams

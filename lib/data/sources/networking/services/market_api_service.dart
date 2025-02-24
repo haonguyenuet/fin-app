@@ -1,5 +1,5 @@
-import 'package:fin_app/data/models/symbol.dart';
-import 'package:fin_app/data/sources/networking/dio_client.dart';
+import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/data/sources/networking/dio_client.dart';
 
 class MarketApiService {
   MarketApiService(DioClient dioClient) : _dioClient = dioClient;

@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:fin_app/data/data_providers.dart';
-import 'package:fin_app/data/models/candle.dart';
-import 'package:fin_app/data/events/candlestick_event.dart';
-import 'package:fin_app/data/models/symbol.dart';
-import 'package:fin_app/data/models/time_interval.dart';
-import 'package:fin_app/data/repositories/candlestick_repository.dart';
-import 'package:fin_app/data/repositories/market_repository.dart';
+import 'package:market_stream/data/data_providers.dart';
+import 'package:market_stream/data/models/candle.dart';
+import 'package:market_stream/data/events/candlestick_event.dart';
+import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/data/models/time_interval.dart';
+import 'package:market_stream/data/repositories/candlestick_repository.dart';
+import 'package:market_stream/data/repositories/market_repository.dart';
 import 'package:riverpod/riverpod.dart';
 
 final symbolDetailVMProvider = StateNotifierProvider.autoDispose<SymbolDetailViewModel, SymbolDetailState>((ref) {

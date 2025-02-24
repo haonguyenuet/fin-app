@@ -1,4 +1,4 @@
-import 'package:fin_app/shared/consts/app_typo.dart';
+import 'package:market_stream/shared/consts/app_typo.dart';
 
 class FinChartDefaults {
   /// The amount of candles to shift right (negative value means shifting left)

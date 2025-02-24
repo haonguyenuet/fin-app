@@ -1,6 +1,6 @@
-import 'package:fin_app/data/events/candlestick_event.dart';
-import 'package:fin_app/data/events/symbol_ticker_event.dart';
-import 'package:fin_app/data/models/time_interval.dart';
+import 'package:market_stream/data/events/candlestick_event.dart';
+import 'package:market_stream/data/events/symbol_ticker_event.dart';
+import 'package:market_stream/data/models/time_interval.dart';
 
 abstract class StreamingService {
   void connect();

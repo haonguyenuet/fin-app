@@ -1,10 +1,10 @@
-import 'package:fin_app/data/repositories/candlestick_repository.dart';
-import 'package:fin_app/data/repositories/market_repository.dart';
-import 'package:fin_app/data/sources/networking/dio_client.dart';
-import 'package:fin_app/data/sources/networking/services/candlestick_api_service.dart';
-import 'package:fin_app/data/sources/networking/services/market_api_service.dart';
-import 'package:fin_app/data/sources/streaming/streaming_service.dart';
-import 'package:fin_app/data/sources/streaming/websocket_service.dart';
+import 'package:market_stream/data/repositories/candlestick_repository.dart';
+import 'package:market_stream/data/repositories/market_repository.dart';
+import 'package:market_stream/data/sources/networking/dio_client.dart';
+import 'package:market_stream/data/sources/networking/services/candlestick_api_service.dart';
+import 'package:market_stream/data/sources/networking/services/market_api_service.dart';
+import 'package:market_stream/data/sources/streaming/streaming_service.dart';
+import 'package:market_stream/data/sources/streaming/websocket_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// =============================== SERVICES ===============================

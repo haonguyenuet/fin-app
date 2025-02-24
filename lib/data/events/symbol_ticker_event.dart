@@ -1,4 +1,4 @@
-import 'package:fin_app/data/models/symbol.dart';
+import 'package:market_stream/data/models/symbol.dart';
 
 /// Sample data:
 ///

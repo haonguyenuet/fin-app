@@ -1,10 +1,10 @@
-import 'package:fin_app/shared/extensions/double_ext.dart';
+import 'package:market_stream/shared/extensions/double_ext.dart';
 
 String formatPrice(double price) {
   int decimalPlaces;
   if (price.abs() > 10) {
     decimalPlaces = 2;
-  }  else if (price.abs() > 1) {
+  } else if (price.abs() > 1) {
     decimalPlaces = 4;
   } else {
     decimalPlaces = 6;
