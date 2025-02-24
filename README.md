@@ -1,6 +1,6 @@
 # Market Stream
 
-MarketStream is a **real-time market data visualization app** built with Flutter, this project delivers a **minimalist, high-performance UI** for tracking market prices and custom candlestick chart. Every pixel, every interaction had to be **manually calculated and optimized**.
+My personal playground in Flutter, MarketStream is a **real-time market data visualization app**, this project delivers a **minimalist, high-performance UI** for tracking market prices and custom candlestick chart. Every pixel, every interaction had to be **manually calculated and optimized**.
 
 ## 1. Key Features
 
