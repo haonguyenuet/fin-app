@@ -1,18 +1,18 @@
-# FinApp
+# Market Stream
 
-My personal playground in Flutter, built from scratch to tinker with candlestick charts and real-time market. Inspired by **Binance App**, this project delivers an elegant, minimalist UI. Every pixel, every interaction had to be **manually calculated and optimized**.
+MarketStream is a **real-time market data visualization app** built with Flutter, this project delivers a **minimalist, high-performance UI** for tracking market prices and custom candlestick chart. Every pixel, every interaction had to be **manually calculated and optimized**.
 
 ## 1. Key Features
 
-- ✅ **Live Symbol List** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
-- ✅ **Large Dataset** - Ensures good performance on heavy data
-- ✅ **Self-built Candlestick Chart** – No dependencies. Drag, zoom, and crosshairs, all crafted by hand
-- ✅ **Live Chart Updates** – Real-time candlestick data with smooth animations
-- ⏳ **Technical Indicators** – Upcoming enhancements featuring moving averages and trend lines for deeper market analysis.
+- ✅ **Live Market Data** – Real-time price tracking for thousands of trading pairs with efficient viewport rendering
+- ✅ **Scalable Data Handling** – Ensures smooth performance with large datasets.  
+- ✅ **Custom Candlestick Chart** – Built from scratch - no dependences, supporting drag, zoom, and crosshairs.  
+- ✅ **Real-time Chart Updates** – Smooth animations with live candlestick data.  
+- ⏳ **Technical Indicators** – Upcoming support for moving averages and trend lines.
 
 ## 2. The Challenge
 
-### 2.1 Symbol List
+### 2.1 Market Data Streaming
 
 Displaying a **real-time symbol list** with prices introduces another layer of complexity:  
 
@@ -22,7 +22,7 @@ Displaying a **real-time symbol list** with prices introduces another layer of c
 
 This part of the project demands a smart **state management strategy**, along with techniques like **lazy loading, viewport tracking, and granular updates** to ensure smooth performance.
 
-### 2.2 Candlestick Chart
+### 2.2 Custom Candlestick Chart  
 
 Crafting a candlestick chart from scratch is far from simple. Unlike static UI components, a candlestick chart requires:  
 
