@@ -1,3 +1,4 @@
+import 'package:market_stream/data/models/symbol.dart';
 import 'package:market_stream/presentation/symbol_detail/widgets/fin_chart/fin_chart.dart';
 import 'package:market_stream/presentation/symbol_detail/symbol_detail_viewmodel.dart';
 import 'package:market_stream/presentation/symbol_detail/widgets/interval_picker.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SymbolDetailScreen extends ConsumerStatefulWidget {
-  const SymbolDetailScreen({super.key});
+  const SymbolDetailScreen( {super.key, required this.symbol,});
+
+  final MarketSymbol symbol;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SymbolDetailState();
@@ -17,7 +20,7 @@ class _SymbolDetailState extends ConsumerState<SymbolDetailScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(symbolDetailVMProvider.notifier).init();
+      ref.read(symbolDetailVMProvider.notifier).init(widget.symbol);
     });
   }
 

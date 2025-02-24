@@ -1,5 +1,6 @@
 import 'package:market_stream/data/models/symbol.dart';
 import 'package:market_stream/presentation/market/market_viewmodel.dart';
+import 'package:market_stream/presentation/symbol_detail/symbol_detail_screen.dart';
 import 'package:market_stream/shared/consts/app_color.dart';
 import 'package:market_stream/shared/consts/app_typo.dart';
 import 'package:market_stream/shared/extensions/double_ext.dart';
@@ -14,15 +15,17 @@ class MarketSymbolRow extends ConsumerWidget {
 
   static const double height = 60;
 
+  void _navigateToSymbolDetail(BuildContext context, MarketSymbol symbol) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => SymbolDetailScreen(symbol: symbol),
+    ));
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final symbol = ref.watch(marketVMProvider.select((state) => state.symbolMap[symbolId]!));
     return GestureDetector(
-      onTap: () {
-        // Navigator.of(context).push(MaterialPageRoute<void>(
-        //   builder: (context) => SymbolDetailScreen(),
-        // ));
-      },
+      onTap: () => _navigateToSymbolDetail(context, symbol),
       child: Container(
         height: height,
         padding: const EdgeInsets.symmetric(horizontal: 16),

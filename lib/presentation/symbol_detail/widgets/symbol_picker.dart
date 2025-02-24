@@ -1,4 +1,5 @@
 import 'package:market_stream/data/models/symbol.dart';
+import 'package:market_stream/presentation/market/market_viewmodel.dart';
 import 'package:market_stream/shared/consts/app_color.dart';
 import 'package:market_stream/shared/consts/app_typo.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _SymbolSearchSheetState extends ConsumerState<_SymbolSearchSheet> {
   @override
   void initState() {
     super.initState();
-    allSymbols = ref.read(symbolDetailVMProvider).symbols ?? [];
+    allSymbols = ref.read(marketVMProvider).symbolMap.values.toList();
     filteredSymbols = List.of(allSymbols);
   }
 

@@ -1,52 +1,36 @@
 import 'dart:async';
 
 import 'package:market_stream/data/data_providers.dart';
-import 'package:market_stream/data/models/candle.dart';
 import 'package:market_stream/data/events/candlestick_event.dart';
+import 'package:market_stream/data/models/candle.dart';
 import 'package:market_stream/data/models/symbol.dart';
 import 'package:market_stream/data/models/time_interval.dart';
 import 'package:market_stream/data/repositories/candlestick_repository.dart';
-import 'package:market_stream/data/repositories/market_repository.dart';
 import 'package:riverpod/riverpod.dart';
 
 final symbolDetailVMProvider = StateNotifierProvider.autoDispose<SymbolDetailViewModel, SymbolDetailState>((ref) {
   return SymbolDetailViewModel(
-    ref.read(marketRepositoryProvider),
     ref.read(candlestickRepositoryProvider),
   );
 });
 
 class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
-  SymbolDetailViewModel(this._marketRepository, this._candlestickRepository) : super(SymbolDetailState());
+  SymbolDetailViewModel(this._candlestickRepository) : super(SymbolDetailState());
 
-  final MarketRepository _marketRepository;
   final CandlestickRepository _candlestickRepository;
 
   StreamSubscription? _candlestickStreamSubscription;
 
-  void init() async {
-    await _fetchSymbols();
-    await _fetchIntervals();
+  void init(MarketSymbol symbol) async {
+    state = state.copyWith(
+      currentSymbol: symbol,
+      intervals: TimeInterval.values,
+      currentInterval: TimeInterval.values.where((interval) => interval.isPinned).first,
+    );
     _fetchNewCandles();
 
     /// Websocket streams handling
     _candlestickStreamSubscription = _candlestickRepository.candlestickStream.listen(_onCandlestickEvent);
-  }
-
-  Future<void> _fetchSymbols() async {
-    final symbols = await _marketRepository.fetchSymbols();
-    state = state.copyWith(
-      symbols: symbols,
-      currentSymbol: symbols.first,
-    );
-  }
-
-  Future<void> _fetchIntervals() async {
-    final intervals = await _candlestickRepository.fetchIntervals();
-    state = state.copyWith(
-      intervals: intervals,
-      currentInterval: intervals.where((interval) => interval.isPinned).first,
-    );
   }
 
   Future<void> _fetchNewCandles() async {
@@ -117,28 +101,24 @@ class SymbolDetailViewModel extends StateNotifier<SymbolDetailState> {
 
 class SymbolDetailState {
   SymbolDetailState({
-    this.symbols,
     this.intervals,
     this.candles,
     this.currentInterval,
     this.currentSymbol,
   });
 
-  final List<MarketSymbol>? symbols;
   final List<TimeInterval>? intervals;
   final List<Candle>? candles;
   final TimeInterval? currentInterval;
   final MarketSymbol? currentSymbol;
 
   SymbolDetailState copyWith({
-    List<MarketSymbol>? symbols,
     List<TimeInterval>? intervals,
     List<Candle>? candles,
     TimeInterval? currentInterval,
     MarketSymbol? currentSymbol,
   }) {
     return SymbolDetailState(
-      symbols: symbols ?? this.symbols,
       intervals: intervals ?? this.intervals,
       candles: candles ?? this.candles,
       currentInterval: currentInterval ?? this.currentInterval,

@@ -13,10 +13,6 @@ class CandlestickRepository extends BaseRepository {
   final CandlestickApiService _apiService;
   final StreamingService _streamingService;
 
-  Future<List<TimeInterval>> fetchIntervals() async {
-    return TimeInterval.values;
-  }
-
   Future<List<Candle>> fetchCandles({
     required String symbol,
     required TimeInterval interval,
